@@ -1,35 +1,32 @@
-window.onload = function () {
+function checkPassword() {
+
+let year = document.getElementById("year").value;
+let error = document.getElementById("error");
+
+if (year === "2024") {
+
+document.getElementById("password-page").style.display = "none";
+
+document.getElementById("loading-page").style.display = "flex";
 
 setTimeout(function () {
 
-document.getElementById("loading").style.display = "none";
+document.getElementById("loading-page").style.display = "none";
 
-document.getElementById("passwordPage").style.display = "flex";
+document.getElementById("home-page").style.display = "flex";
 
 },3000);
 
-};
+} else {
 
-function checkPassword(){
-
-let pass = document.getElementById("password").value;
-
-if(pass=="2024"){
-
-document.getElementById("passwordPage").style.display="none";
-
-document.getElementById("main").style.display="flex";
-
-}else{
-
-alert("Wrong Password 💔");
+error.innerHTML = "❌ Wrong Year! Try Again ❤️";
 
 }
 
 }
 
-function nextSection(){
+function nextStory(){
 
-alert("Welcome Maha 🤍\n\nThis is only the beginning...\nOur story starts here 🌸");
+alert("❤️ Our Story page will open here in the next update!");
 
 }
