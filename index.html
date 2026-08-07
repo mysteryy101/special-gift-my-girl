@@ -1,11 +1,66 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Special Gift For My Girl</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday Maha ❤️</title>
+
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+<div id="password-page" class="page">
+
+<h2>🔒 ACCESS REQUIRED</h2>
+
+<p>Only Maha can unlock this ❤️</p>
+
+<p><b>Hint:</b> The year we met.</p>
+
+<select id="year">
+<option value="">Select Year</option>
+<option>2022</option>
+<option>2023</option>
+<option>2024</option>
+<option>2025</option>
+<option>2026</option>
+</select>
+
+<br><br>
+
+<button onclick="checkPassword()">
+UNLOCK ❤️
+</button>
+
+<p id="error"></p>
+
+</div>
+
+<div id="loading-page" class="page" style="display:none;">
+
+<h2>Loading Memories...</h2>
+
+<div class="loader">
+<div class="bar"></div>
+</div>
+
+</div>
+
+<div id="home-page" class="page" style="display:none;">
+
 <h1>Happy Birthday Maha ❤️</h1>
+
+<p>
+A friendship that time can't erase...
+</p>
+
+<button onclick="nextStory()">
+Let's Begin →
+</button>
+
+</div>
+
+<script src="script.js"></script>
 
 </body>
 </html>
