@@ -1,66 +1,291 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Happy Birthday Maha ❤️</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Special Gift For My Girl — Maha 🤍</title>
 
-  <link rel="stylesheet" href="style.css">
+<!-- Fonts: elegant display serif + soft body sans -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Italiana&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div id="password-page" class="page">
+<!-- ================= AMBIENT LAYERS (always present) ================= -->
+<div class="grain"></div>
+<canvas id="sparkle-canvas"></canvas>
+<div id="floating-hearts"></div>
 
-<h2>🔒 ACCESS REQUIRED</h2>
-
-<p>Only Maha can unlock this ❤️</p>
-
-<p><b>Hint:</b> The year we met.</p>
-
-<select id="year">
-<option value="">Select Year</option>
-<option>2022</option>
-<option>2023</option>
-<option>2024</option>
-<option>2025</option>
-<option>2026</option>
-</select>
-
-<br><br>
-
-<button onclick="checkPassword()">
-UNLOCK ❤️
+<!--
+  MUSIC PLAYER
+  ------------------------------------------------------------------
+  Replace "assets/music.mp3" below with your own song file to enable
+  background music. Until you add a file, the button simply won't
+  play anything (no error will be shown to Maha).
+-->
+<audio id="bg-music" loop preload="none">
+  <source src="assets/music.mp3" type="audio/mpeg">
+</audio>
+<button id="music-toggle" class="music-btn" aria-label="Play or pause music">
+  <span class="music-icon">♪</span>
 </button>
 
-<p id="error"></p>
+<!-- ================= SCREEN 1 : LOCK SCREEN ================= -->
+<section id="screen-lock" class="screen active">
+  <div class="stack">
+    <p class="eyebrow">🔐 A LITTLE SURPRISE FOR YOU</p>
+    <h1 class="script-heading">Only Maha can unlock this 🤍</h1>
 
-</div>
+    <div class="glass-card lock-card">
+      <p class="lock-question">When did our friendship begin?</p>
+      <div class="year-grid" id="year-grid">
+        <button class="year-btn" data-year="2022">2022</button>
+        <button class="year-btn" data-year="2023">2023</button>
+        <button class="year-btn" data-year="2024">2024</button>
+        <button class="year-btn" data-year="2025">2025</button>
+        <button class="year-btn" data-year="2026">2026</button>
+      </div>
+      <p id="lock-feedback" class="lock-feedback" aria-live="polite"></p>
+    </div>
+  </div>
 
-<div id="loading-page" class="page" style="display:none;">
+  <!-- shown briefly after correct answer -->
+  <div id="unlock-loader" class="unlock-loader">
+    <div class="unlock-heart">🤍</div>
+    <p class="unlock-text">ACCESS GRANTED 🤍</p>
+    <div class="loader-bar"><div class="loader-fill"></div></div>
+  </div>
+</section>
 
-<h2>Loading Memories...</h2>
+<!-- ================= SCREEN 2 : WELCOME ================= -->
+<section id="screen-welcome" class="screen">
+  <div class="stack">
+    <p class="eyebrow">SPECIAL GIFT FOR MY GIRL</p>
+    <h1 class="hero-heading">Happy Birthday,<br><span>Maha</span> 🎂🤍</h1>
+    <p class="quiet-line">
+      Some friendships don't need daily conversations…<br>
+      they only need a place in the heart.
+    </p>
+    <button class="glow-btn" data-next="screen-story">LET'S BEGIN <span class="spark">✨</span></button>
+  </div>
+</section>
 
-<div class="loader">
-<div class="bar"></div>
-</div>
+<!-- ================= SCREEN 3 : OUR STORY ================= -->
+<section id="screen-story" class="screen">
+  <div class="section-inner">
+    <p class="eyebrow">OUR STORY</p>
+    <h2 class="section-heading">A random chapter that became forever</h2>
 
-</div>
+    <div class="thread-timeline" id="thread-timeline">
+      <div class="thread-line"></div>
 
-<div id="home-page" class="page" style="display:none;">
+      <div class="thread-node" data-year="2024">
+        <span class="thread-dot"></span>
+        <div class="thread-content">
+          <span class="thread-year">2024</span>
+          <p>Just a random group chat…</p>
+        </div>
+      </div>
 
-<h1>Happy Birthday Maha ❤️</h1>
+      <div class="thread-node">
+        <span class="thread-dot"></span>
+        <div class="thread-content">
+          <p>Two strangers started talking.</p>
+        </div>
+      </div>
 
-<p>
-A friendship that time can't erase...
-</p>
+      <div class="thread-node">
+        <span class="thread-dot"></span>
+        <div class="thread-content">
+          <p>Somehow, that random friendship became something special.</p>
+        </div>
+      </div>
 
-<button onclick="nextStory()">
-Let's Begin →
-</button>
+      <div class="thread-node">
+        <span class="thread-dot"></span>
+        <div class="thread-content">
+          <p>Online friends became real-life friends.</p>
+        </div>
+      </div>
 
-</div>
+      <div class="thread-node">
+        <span class="thread-dot"></span>
+        <div class="thread-content">
+          <p>We visited each other's homes.</p>
+        </div>
+      </div>
+
+      <div class="thread-node">
+        <span class="thread-dot"></span>
+        <div class="thread-content">
+          <p>Two years later, there are memories I could never replace.</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="closing-line">Sometimes the most unexpected people become the most unforgettable chapters of our lives. 🤍</p>
+    <button class="glow-btn" data-next="screen-gallery">CONTINUE ✨</button>
+  </div>
+</section>
+
+<!-- ================= SCREEN 4 : MEMORIES / GALLERY ================= -->
+<section id="screen-gallery" class="screen">
+  <div class="section-inner">
+    <p class="eyebrow">MEMORIES</p>
+    <h2 class="section-heading">Some memories never fade</h2>
+
+    <!--
+      GALLERY PHOTOS
+      --------------------------------------------------------------
+      Each <figure> below holds one photo. To use your own picture,
+      just replace the file inside /assets (e.g. assets/photo1.jpg)
+      with a photo of the same name — the layout updates itself.
+      You can also edit the <figcaption> text under each photo.
+    -->
+    <div class="gallery-grid">
+      <figure class="gallery-card">
+        <img src="assets/photo1.jpg" alt="A memory with Maha">
+        <figcaption>That moment 🤍</figcaption>
+      </figure>
+      <figure class="gallery-card">
+        <img src="assets/photo2.jpg" alt="A memory with Maha">
+        <figcaption>One of those memories…</figcaption>
+      </figure>
+      <figure class="gallery-card">
+        <img src="assets/photo3.jpg" alt="A memory with Maha">
+        <figcaption>Us 🫶🏻</figcaption>
+      </figure>
+      <figure class="gallery-card">
+        <img src="assets/photo4.jpg" alt="A memory with Maha">
+        <figcaption>Some memories never fade.</figcaption>
+      </figure>
+      <figure class="gallery-card">
+        <img src="assets/photo5.jpg" alt="A memory with Maha">
+        <figcaption>Forever a beautiful chapter.</figcaption>
+      </figure>
+    </div>
+
+    <button class="glow-btn" data-next="screen-quiz">CONTINUE ✨</button>
+  </div>
+</section>
+
+<!-- ================= SCREEN 5 : QUIZ ================= -->
+<section id="screen-quiz" class="screen">
+  <div class="section-inner">
+    <p class="eyebrow">A LITTLE QUESTION</p>
+    <h2 class="section-heading">How well do you know me?</h2>
+
+    <div class="glass-card quiz-card">
+      <p class="quiz-question">Do you still consider me your friend?</p>
+      <div class="quiz-options">
+        <button class="quiz-btn">Of course 🤍</button>
+        <button class="quiz-btn">Maybe 😭</button>
+        <button class="quiz-btn">Obviously!</button>
+      </div>
+    </div>
+
+    <div class="glass-card quiz-card">
+      <p class="quiz-question">What do you think is our most special memory?</p>
+      <textarea class="quiz-input" rows="2" placeholder="Type it here…"></textarea>
+    </div>
+
+    <div class="glass-card quiz-card">
+      <p class="quiz-question">How well do you think you know me?</p>
+      <textarea class="quiz-input" rows="2" placeholder="Type it here…"></textarea>
+    </div>
+
+    <div class="glass-card quiz-card">
+      <p class="quiz-question">What am I to you?</p>
+      <textarea class="quiz-input" rows="2" placeholder="Type it here…"></textarea>
+    </div>
+
+    <div class="glass-card quiz-card">
+      <p class="quiz-question">What is one thing you will always remember about our friendship?</p>
+      <textarea class="quiz-input" rows="2" placeholder="Type it here…"></textarea>
+    </div>
+
+    <p class="closing-line">
+      Whatever your answers are…<br>
+      I hope you know that our friendship has always meant a lot to me. 🤍
+    </p>
+
+    <button class="glow-btn" data-next="screen-letter">CONTINUE ✨</button>
+  </div>
+</section>
+
+<!-- ================= SCREEN 6 : LETTER ================= -->
+<section id="screen-letter" class="screen">
+  <div class="section-inner">
+    <p class="eyebrow">FOR YOU</p>
+    <div class="glass-card letter-card">
+      <h2 class="letter-title">My Dearest Maha, 🤍</h2>
+      <div class="letter-body">
+        <p>I don't know where life will take us in the future. Maybe we'll become busy, maybe we'll talk less, or maybe our paths will become different. But one thing will never change…</p>
+        <p>You will always be one of the most beautiful friendships I've ever had.</p>
+        <p>From a random group chat in 2024 to becoming real friends who visited each other's homes… I never imagined that such a beautiful bond would become such an important part of my life.</p>
+        <p>You weren't just a friend.<br>You became a memory that I'll always carry with me.</p>
+        <p>If someone ever asks me,<br><em>"Who was the best friend in your life?"</em></p>
+        <p>My answer will always be…</p>
+        <p>Jerry… and after that, only you, Maha.</p>
+        <p>Maybe today we aren't as close as we used to be.</p>
+        <p>Maybe things have changed.</p>
+        <p>But that doesn't erase the place you have in my heart.</p>
+        <p>Thank you for every conversation, every laugh, every moment, every memory, and every time you made me feel that I wasn't alone.</p>
+        <p>On your birthday, I don't ask for anything except this…</p>
+        <p>May Allah always protect you. May He fill your life with peace, happiness, sincere people, and endless blessings.</p>
+        <p>I pray that every dream you keep in your heart comes true, and every hardship becomes ease.</p>
+        <p>Even if time changes everything…</p>
+        <p>I'll never forget the chapter of my life that had your name written on it.</p>
+        <p>16 September wasn't just the day you were born…</p>
+        <p>It became the day Allah gifted me a friend I'll never forget.</p>
+        <p class="letter-signoff">Happy Birthday, Maha. 🤍</p>
+        <p>No matter where life takes us… you'll always remain one of the most beautiful memories and one of the best friends I've ever had in my life.</p>
+      </div>
+    </div>
+
+    <div class="glass-card letter-card">
+      <h2 class="letter-title">Crime Partner 🥹</h2>
+      <div class="letter-body">
+        <p>Thank you for supporting me, for being the best crime partner, and for being there for me through everything.</p>
+        <p>Thank you for every little thing I shared with you, and for every moment you stayed by my side.</p>
+        <p>I couldn't be a good friend to anyone else, but I'm happy that I found a friend in you.</p>
+        <p>I'm so happy that among all the people I met, I found someone who understands me, takes care of me, and always wants to see me happy.</p>
+        <p>May Allah protect you, take care of you, and help you fulfill all your dreams.</p>
+        <p class="letter-signoff">Again, Happy Birthday, Churail! 🥹🤍</p>
+      </div>
+    </div>
+
+    <button class="glow-btn" data-next="screen-final">ONE LAST THING… ✨</button>
+  </div>
+</section>
+
+<!-- ================= SCREEN 7 : FINAL SURPRISE ================= -->
+<section id="screen-final" class="screen">
+  <div class="stack">
+    <div id="final-prompt">
+      <p class="eyebrow">ONE LAST THING…</p>
+      <button class="glow-btn" id="final-reveal-btn">CLICK FOR ONE LAST MESSAGE 🤍</button>
+    </div>
+
+    <div id="final-message" class="final-message hidden">
+      <p class="typewriter" data-text="Some friendships don't need daily conversations… they only need a place in the heart."></p>
+      <p class="typewriter" data-text="Maybe life changes. Maybe people change. Maybe distance changes things."></p>
+      <p class="typewriter" data-text="But some memories remain forever."></p>
+      <h2 class="final-heading typewriter-heading" data-text="Happy Birthday, Maha 🤍"></h2>
+      <p class="typewriter final-line" data-text="No matter where life takes us… you'll always be one of the most beautiful memories of my life."></p>
+    </div>
+  </div>
+  <canvas id="confetti-canvas"></canvas>
+</section>
+
+<!-- progress dots -->
+<div id="progress-dots" class="progress-dots"></div>
 
 <script src="script.js"></script>
-
 </body>
-</html>
+  </html>
+  
